@@ -3,7 +3,7 @@ import java.awt.*;
 
 public final class Window {
 
-    static Font f30 = new Font("Leelawadee", Font.PLAIN, 30);
+    static Font f30 = new Font("Leelawadee", Font.PLAIN, 10);
     public Window(){
         JFrame mainWindow = new JFrame("COMP230 Project");
         mainWindow.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
@@ -52,6 +52,7 @@ class WindowPaint extends JPanel {
         tabbedPanel.addTab("Employees", new Employee());
         tabbedPanel.addTab("Orders", new OrderContents());
 
-        this.add(tabbedPanel, BorderLayout.CENTER);
+        this.add(tabbedPanel);
+
     }
 }

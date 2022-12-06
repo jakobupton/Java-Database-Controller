@@ -2,19 +2,14 @@ import javax.swing.*;
 import java.awt.*;
 
 public class Delivery extends JPanel{
-    static int trackingNum = 0;
-    static int trailerNum = 0;
-    static int employeeNum = 0;
-    static String businessID = "";
-    static String wareNo = "";
-    static String orderID = "";
-    private Color tabColor;
-
+    Object[][] data = {{}};
+    String[] columnNames = {};
 
     public Delivery(){
         super(true);
-
-        this.setBackground(new Color(80, 80, 80));
+        if (data.length > 0 && columnNames.length > 0){
+            this.add(new createTablePanel(data, columnNames));
+        }
     }
 
     public void paintComponent(Graphics g){
