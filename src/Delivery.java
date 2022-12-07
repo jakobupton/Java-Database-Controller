@@ -3,17 +3,16 @@ import java.awt.*;
 import java.sql.SQLException;
 
 public class Delivery extends JPanel{
-    Object[][] data = {{}};
-    String[] columnNames = {"trackingNum", "trailerNum", "employeeNum", "businessID", "wareNo", "orderID"};
+    Object[][] data;
+    String[] columnNames;
     String sqlQuery = "SELECT * FROM Delivery";
 
     public Delivery() throws SQLException {
         super(true);
 
         data = Main.sqlQueryFetchTable(sqlQuery);
-        if (data.length > 0 && columnNames.length > 0){
-            this.add(new createTablePanel(data, columnNames));
-        }
+        columnNames = Main.sqlQueryFetchColumns(sqlQuery);
+        this.add(new createTablePanel(data, columnNames));
     }
 
     public void paintComponent(Graphics g){

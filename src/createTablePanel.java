@@ -7,7 +7,7 @@ public class createTablePanel extends JPanel {
         super(true);
 
         dataTable = new JTable(data, columnNames);
-        dataTable.setFont(new Font("Roboto Mono", Font.PLAIN, 10));
+        dataTable.setFont(new Font("Roboto Mono", Font.PLAIN, 12));
         dataTable.setGridColor(Color.BLACK);
         dataTable.setEnabled(false);
         dataTable.getTableHeader().setReorderingAllowed(false);

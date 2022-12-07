@@ -4,13 +4,14 @@ import java.sql.SQLException;
 
 public class Truck extends JPanel{
     String sqlQuery = "SELECT * FROM Truck";
-    String[] columnNames = {"plateNo", "trailerNo", "maxLoad", "truckModel"};
-    Object[][] data = null;
+    String[] columnNames;
+    Object[][] data;
 
     public Truck() throws SQLException {
         super(true);
 
         data = Main.sqlQueryFetchTable(sqlQuery);
+        columnNames = Main.sqlQueryFetchColumns(sqlQuery);
         this.add(new createTablePanel(data, columnNames));
     }
 

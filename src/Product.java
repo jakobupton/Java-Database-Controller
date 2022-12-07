@@ -4,13 +4,14 @@ import java.sql.SQLException;
 
 public class Product extends JPanel{
     String sqlQuery = "SELECT * FROM Product";
-    String[] columnNames = {"productSKU", "weight", "productName", "price", "dimensions"};
-    Object[][] data = null;
+    String[] columnNames;
+    Object[][] data;
 
     public Product() throws SQLException {
         super(true);
 
         data = Main.sqlQueryFetchTable(sqlQuery);
+        columnNames = Main.sqlQueryFetchColumns(sqlQuery);
         this.add(new createTablePanel(data, columnNames));
     }
 

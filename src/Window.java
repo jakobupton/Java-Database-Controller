@@ -4,7 +4,7 @@ import java.sql.SQLException;
 
 public final class Window {
 
-    static Font f30 = new Font("Leelawadee", Font.PLAIN, 10);
+    static Font f30 = new Font("Leelawadee", Font.PLAIN, 14);
     public Window() throws SQLException {
         JFrame mainWindow = new JFrame("COMP230 Project");
         mainWindow.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
@@ -27,9 +27,7 @@ public final class Window {
 }
 
 class WindowPaint extends JPanel {
-    Dimension preferredSize = new Dimension(800,600);
-    private JPanel masterPanel;
-    private JTabbedPane tabbedPanel;
+    final JTabbedPane tabbedPanel;
     public WindowPaint() throws SQLException {
         super(true);
 
