@@ -1,22 +1,20 @@
 import javax.swing.*;
 import java.awt.*;
+import java.sql.SQLException;
 
 public class OrderContents extends JPanel{
-    static String id = "";
-    static String productID = "";
-    static int quantity = 0;
-    private static JPanel orderContentsTab;
+    String sqlQuery = "SELECT * FROM ordercontents";
+    String[] columnNames = {"orderID", "productID", "quantity"};
+    Object[][] data = null;
 
-    public OrderContents(){
+    public OrderContents() throws SQLException {
         super(true);
 
-        this.setBackground(new Color(80, 80, 80));
+        data = Main.sqlQueryFetchTable(sqlQuery);
+        this.add(new createTablePanel(data, columnNames));
     }
 
     public void paintComponent(Graphics g){
         super.paintComponent(g);
-
-        g.setColor(Color.WHITE);
-        Window.drawCenteredString(g, "Testing8", this.getWidth()/2, 50, Window.f30);
     }
 }

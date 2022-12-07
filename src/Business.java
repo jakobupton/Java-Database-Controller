@@ -1,23 +1,20 @@
 import javax.swing.*;
 import java.awt.*;
+import java.sql.SQLException;
 
 public class Business extends JPanel{
-    static String id = "";
-    static String name = "";
-    static String address = "";
-    static String email = "";
-    static String phone = "";
-    public Business(){
+    Object[][] data = null;
+    String[] columnNames = {"businessID", "businessName", "businessAddress", "businessEmail", "businessPhone"};
+    String sqlFetch = "SELECT * FROM Business";
+    public Business() throws SQLException {
         super(true);
 
-        this.setBackground(new Color(80, 80, 80));
+        data = Main.sqlQueryFetchTable(sqlFetch);
+        this.add(new createTablePanel(data, columnNames));
     }
 
     public void paintComponent(Graphics g){
         super.paintComponent(g);
-
-        g.setColor(Color.WHITE);
-        Window.drawCenteredString(g, "Testing6", this.getWidth()/2, 50, Window.f30);
     }
 
 }

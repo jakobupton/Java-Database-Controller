@@ -1,22 +1,21 @@
 import javax.swing.*;
 import java.awt.*;
+import java.sql.SQLException;
 
 public class Invoice extends JPanel {
-    static String id = "";
-    static String businessID = "";
-    static String orderID = "";
-    private static JPanel invoiceTab;
+    String[] columnNames = {"invoiceID", "businessID", "orderID"};
+    String sqlQuery = "SELECT * FROM Invoice";
+    Object[][] data = null;
 
-    public Invoice(){
+    public Invoice() throws SQLException {
         super(true);
 
-        this.setBackground(new Color(80, 80, 80));
+        data = Main.sqlQueryFetchTable(sqlQuery);
+        this.add(new createTablePanel(data, columnNames));
+
     }
 
     public void paintComponent(Graphics g){
         super.paintComponent(g);
-
-        g.setColor(Color.WHITE);
-        Window.drawCenteredString(g, "Testing3", this.getWidth()/2, 50, Window.f30);
     }
 }
