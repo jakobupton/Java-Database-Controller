@@ -1,7 +1,5 @@
 import javax.swing.*;
 import java.awt.*;
-import java.awt.event.ActionEvent;
-import java.awt.event.ActionListener;
 import java.sql.SQLException;
 
 public class Home extends JPanel {
@@ -38,9 +36,6 @@ public class Home extends JPanel {
                 throw new RuntimeException(ex);
             }
         });
-
-        //TODO
-        // Home.textField.getText() into SQL statement and run it, on submit
 
     }
 

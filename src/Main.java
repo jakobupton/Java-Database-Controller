@@ -3,7 +3,7 @@ import java.sql.*;
 public class Main {
     public static Connection cnx = null;
 
-    //Could have made the first element of the table the column names and then splice that off to make tables but I'm lazy
+    //Could have made the first element of the table the column names and then splice that off to make tables, but I'm lazy
     //Fetches the column names of a given query.
     //Ex. "SELECT * FROM WAREHOUSE" returns ["wareNo", "warePhone", "wareAddress"]
     public static String[] sqlQueryFetchColumns(String query) throws SQLException{
@@ -24,7 +24,7 @@ public class Main {
     //Fetches the data from a given query.
     //returns in form of 2D Object Array with each row being the first index and every column being the second index
     public static Object[][] sqlQueryFetchTable(String query) throws SQLException {
-        Object[][] data = null;
+        Object[][] data;
         Statement stmt = cnx.createStatement(ResultSet.TYPE_SCROLL_INSENSITIVE, ResultSet.CONCUR_READ_ONLY);
         ResultSet rs = stmt.executeQuery(query);
         int numberOfRows;
@@ -33,7 +33,7 @@ public class Main {
             numberOfRows = rs.getRow();
             rs.beforeFirst();
         }catch(Exception e){
-            return data;
+            return null;
         }
         int numberOfColumns = rs.getMetaData().getColumnCount();
         data = new Object[numberOfRows][numberOfColumns];
