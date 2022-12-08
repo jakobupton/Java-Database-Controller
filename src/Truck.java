@@ -102,7 +102,7 @@ public class Truck extends JPanel{
                 pstmt.setString(1, plateNo.getText());
                 pstmt.setInt(2, Integer.parseInt(trailerNo.getText()));
                 pstmt.setInt(3, Integer.parseInt(maxLoad.getText()));
-                pstmt.setString(4, maxLoad.getText());
+                pstmt.setString(4, truckModel.getText());
 
                 pstmt.executeUpdate();
 
@@ -123,7 +123,7 @@ public class Truck extends JPanel{
         removeButton.addActionListener(e -> {
             try{
                 PreparedStatement pstmt = Main.cnx.prepareStatement("DELETE FROM TRUCK WHERE plateNo = ?");
-                pstmt.setString(1, plateNo.getText());
+                pstmt.setString(1, removeNumber.getText());
                 pstmt.executeUpdate();
 
                 this.add(table);
