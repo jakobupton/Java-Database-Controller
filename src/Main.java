@@ -40,7 +40,9 @@ public class Main {
     }
     public static void main(String[] args) throws SQLException {
         //Init Objects
-        String url = "jdbc:mysql://96.48.33.210:3306/comp230project";
+
+        //enter the ip and database of your own MySQL server here
+        String url = "jdbc:mysql://localhost:3306/databaseName";
         String username = "root";
         String password = "password";
 
