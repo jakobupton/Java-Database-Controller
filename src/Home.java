@@ -6,35 +6,55 @@ public class Home extends JPanel {
     static JEditorPane textField;
     JLabel prompt;
 
-    Object[][] data = null;
-    String[] test = {"wareNo", "warePhone", "wareAddress"};
-    public Home() {
+    String[] columnNames;
+    Object[][] data;
+    Object[][] dataTemp;
+    static createTablePanel table;
+    final String defaultQuery = ("SELECT wareNo, warePhone, wareAddress\n" +
+            "\tFROM Warehouse\n" +
+            "\tWHERE wareNo >= 185;");
+    public Home() throws SQLException {
+
         super(true);
 
-        this.setLayout(null);
+        //table showing database info
+        dataTemp = Main.sqlQueryFetchTable("SELECT table_name\n" +
+                "FROM information_schema.tables\n" +
+                "WHERE table_type='BASE TABLE' AND table_schema = 'comp230project'");
+        assert dataTemp != null;
+        columnNames = TableManipulate.getColumnName(dataTemp);
+        data = TableManipulate.getTableData(dataTemp);
+        this.add(new createTablePanel(data, new String[]{"comp230Project"}));
 
-        if(data != null) {
-            this.add(new createTablePanel(data, test));
-        }
+        //this.setLayout(null);
         prompt = new JLabel("Manual Query");
-        prompt.setFont(new Font("Roboto", Font.PLAIN, 20));
-        prompt.setBounds(400, 400 - prompt.getFont().getSize() - 2, 400, prompt.getFont().getSize() + 2);
+        prompt.setFont(new Font("Roboto Condensed", Font.PLAIN, 20));
         textField = new JEditorPane();
         textField.setAutoscrolls(true);
-        textField.setBounds(400, 400, 400, 125);
-        textField.setFont(new Font("Roboto Mono", Font.PLAIN, 12));
+        textField.setBounds(400, 200, 400, 125);
+        textField.setText(defaultQuery);
+        textField.setFont(Window.mono12);
         JButton submit = new JButton("Submit");
         submit.setBounds(700, 525, 80, 25);
+        submit.setFont(Window.f14);
+        table = new createTablePanel(data, columnNames);
         this.add(prompt);
         this.add(textField,BorderLayout.CENTER);
         this.add(submit);
         submit.addActionListener(e -> {
             try {
-                data = Main.sqlQueryFetchTable(Home.textField.getText());
-                this.updateUI();
+                dataTemp = Main.sqlQueryFetchTable(textField.getText());
+                assert dataTemp != null;
+                columnNames = TableManipulate.getColumnName(dataTemp);
+                data = TableManipulate.getTableData(dataTemp);
+                this.remove(table);
+                table = new createTablePanel(data,columnNames);
+                this.add(table);
             } catch (SQLException ex) {
-                throw new RuntimeException(ex);
+                textField.setText("Invalid Query!");
             }
+        textField.updateUI();
+        this.updateUI();
         });
 
     }
@@ -42,9 +62,5 @@ public class Home extends JPanel {
 
     public void paintComponent(Graphics g){
         super.paintComponent(g);
-
-        g.setColor(Color.BLACK);
-        Window.drawCenteredString(g, "yabbadabba do" , 300, 300, Window.f30);
-
     }
 }

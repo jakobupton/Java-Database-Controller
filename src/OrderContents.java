@@ -2,16 +2,20 @@ import javax.swing.*;
 import java.awt.*;
 import java.sql.SQLException;
 
+@SuppressWarnings("SpellCheckingInspection")
 public class OrderContents extends JPanel{
-    String sqlQuery = "SELECT * FROM ordercontents";
+    final String sqlQuery = "SELECT * FROM ordercontents";
     String[] columnNames;
     Object[][] data;
+    Object[][] dataTemp;
 
     public OrderContents() throws SQLException {
         super(true);
 
-        data = Main.sqlQueryFetchTable(sqlQuery);
-        columnNames = Main.sqlQueryFetchColumns(sqlQuery);
+        dataTemp = Main.sqlQueryFetchTable(sqlQuery);
+        assert dataTemp != null;
+        columnNames = TableManipulate.getColumnName(dataTemp);
+        data = TableManipulate.getTableData(dataTemp);
         this.add(new createTablePanel(data, columnNames));
     }
 

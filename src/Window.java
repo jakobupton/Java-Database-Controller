@@ -3,8 +3,8 @@ import java.awt.*;
 import java.sql.SQLException;
 
 public final class Window {
-
-    static Font f30 = new Font("Leelawadee", Font.PLAIN, 14);
+    static final Font f14 = new Font("Roboto Condensed", Font.PLAIN, 14);
+    static final Font mono12 = new Font("Roboto Mono", Font.PLAIN, 12);
     public Window() throws SQLException {
         JFrame mainWindow = new JFrame("COMP230 Project");
         mainWindow.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
@@ -16,14 +16,6 @@ public final class Window {
         mainWindow.setResizable(false);
         mainWindow.setPreferredSize(new Dimension(600, 600));
     }
-
-    public static void drawCenteredString(Graphics g, String text, int x, int y, Font ff){
-        FontMetrics metrics = g.getFontMetrics(ff);
-        x -= (metrics.stringWidth(text)) / 2;
-        g.setFont(ff);
-        g.drawString(text, x, y);
-    }
-
 }
 
 class WindowPaint extends JPanel {
@@ -32,6 +24,7 @@ class WindowPaint extends JPanel {
         super(true);
 
         setOpaque(true);
+
         //tabs to attach each panel to
         tabbedPanel = new JTabbedPane();
         tabbedPanel.setFont(new Font("Roboto", Font.PLAIN, 16));
@@ -50,7 +43,7 @@ class WindowPaint extends JPanel {
             tabbedPanel.addTab("Products", new Product());
             tabbedPanel.addTab("Businesses", new Business());
             tabbedPanel.addTab("Employees", new Employee());
-            tabbedPanel.addTab("Orders", new OrderContents());
+            //tabbedPanel.addTab("Orders", new OrderContents());
             this.add(tabbedPanel);
         }
     }
